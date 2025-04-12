@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void {
+        Schema::create('follow_up_elements', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('element_code')->unique();
+            $table->string('name');
+            $table->string('type');
+            $table->text('hook');
+            $table->text('consequence');
+            $table->uuid('introduced_in_session');
+            $table->json('reused_in_sessions')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void {
+        Schema::dropIfExists('follow_up_elements');
+    }
+};
