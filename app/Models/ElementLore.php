@@ -3,17 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\UsesUuid;
 
 class ElementLore extends Model
 {
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $primaryKey = 'id';
+    use UsesUuid;
+
     protected $table = 'element_lore';
 
-
     protected $fillable = [
-        'id',
         'element_id',
         'pending_element_name',
         'title',
@@ -23,5 +21,7 @@ class ElementLore extends Model
         'created_by',
         'tags',
     ];
-    
+    protected $casts = [
+        'tags' => 'array',
+    ];
 }

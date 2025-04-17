@@ -4,17 +4,24 @@ namespace App\Traits;
 
 use Illuminate\Support\Str;
 
-trait GeneratesUuid
+trait UsesUuid
 {
-    protected static function boot()
+    protected static function bootUsesUuid()
     {
-        parent::boot(); // call parent's boot method if it exists
-
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
     }
-}
 
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
+}

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('created_by'); // DM or user who ran the profile
             $table->json('tags')->nullable(); // e.g., "prep", "reveal", "version 2"
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+
+
         });
     }
 

@@ -3,31 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use App\Traits\UsesUuid;
+use App\Services\ChatGPTService;
+use Illuminate\Support\Facades\Log;  // Add this line at the top of the file
+
 
 class SessionHistory extends Model
 {
+    use UsesUuid;
 
-    protected static function boot()
-{
-    parent::boot();
-
-    static::creating(function ($model) {
-        $model->id = (string) Str::uuid();
-    });
-}
-
-
-
-    public $incrementing = false;
-    protected $keyType = 'string';
-    protected $primaryKey = 'id';
-
-    protected $table = 'session_history'; // 👈 This line fixes the issue
+    protected $table = 'session_history';
 
     protected $fillable = [
         'story_id',
-        'session_code',
         'session_title',
         'date',
         'type',
@@ -48,4 +36,6 @@ class SessionHistory extends Model
         'google_doc_link',
         'multitrack_recording',
     ];
-}
+
+/////////////////////////////////////Chat GPT Integration/////////////////////////////////////
+

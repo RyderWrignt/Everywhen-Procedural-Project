@@ -13,11 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create 10 users for testing
+        User::factory(10)->create();
 
+        // Optionally create a specific user you can reference in Tinker
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Test Admin',
             'email' => 'test@example.com',
+            'password' => bcrypt('secret123'),
+            'role' => 'admin',
         ]);
     }
 }
