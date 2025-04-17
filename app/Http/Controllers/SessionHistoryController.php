@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SessionHistory;
-use Illuminate\Support\Str;
 
 class SessionHistoryController extends Controller
 {
@@ -36,12 +35,13 @@ class SessionHistoryController extends Controller
             'noun' => $request->input('noun'),
             'date' => now(),
         ]);
-        public function index()
-        {
-            $sessions = \App\Models\SessionHistory::with('story')->get();
-            return view('sessions.index', compact('sessions'));
-        }
-        
+
         return redirect('/sessions/create')->with('success', 'Session created!');
+    }
+
+    public function index()
+    {
+        $sessions = SessionHistory::with('story')->get();
+        return view('sessions.index', compact('sessions'));
     }
 }
